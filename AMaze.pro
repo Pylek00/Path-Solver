@@ -13,6 +13,7 @@ SOURCES += \
     graphicobject.cpp \
     main.cpp \
     mainwindow.cpp \
+    mapfield.cpp \
     movingobject.cpp \
     object.cpp \
     player.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     gamestate.h \
     graphicobject.h \
     mainwindow.h \
+    mapfield.h \
     movingobject.h \
     object.h \
     player.h \

@@ -15,6 +15,7 @@ public:
     //getters
     sf::Vector2f getPosition();
     int getSize();
+    int getSeeRange();
 
     //setters
     void setPosition(sf::Vector2f position);
@@ -24,6 +25,7 @@ public:
 
 private:
     sf::Vector2u mapSize;
+    int seeRange;
 
 protected:
 };

@@ -4,7 +4,8 @@ Player::Player(int speed, int size)
 {
     this->speed = speed;
     this->size = size;
-    this->position = sf::Vector2f(50,50);
+    this->position = sf::Vector2f(15,315);
+    this->seeRange = 50;
 
 }
 Player::~Player()
@@ -76,9 +77,8 @@ void Player::move(sf::RenderTarget* target)
             this->position.y = this->mapSize.y-this->size;
         }
     }
-
-
-
-
-
+}
+int Player::getSeeRange()
+{
+    return this->seeRange;
 }

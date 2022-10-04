@@ -13,8 +13,8 @@ void Game::initWindow(){
 
     std::ifstream ifs("AMaze/Config/window.txt");
     std::string title = "Maze Explorer";
-    window_bounds.width = 800;
-    window_bounds.height = 600;
+    window_bounds.width = 805;
+    window_bounds.height = 605;
     unsigned framerate_limit = 120;
     bool vertical_sync_enabled = false;
     settings.antialiasingLevel = 8;
@@ -87,7 +87,7 @@ void Game::update()
 {
 
     this->updateDt();
-    this->updateSFMLevents();
+
 
     if(!this->states.empty())
     {
@@ -105,6 +105,7 @@ void Game::update()
         this->endApplication();
         this->window->close();
     }
+    this->updateSFMLevents();
 }
 
 
@@ -136,7 +137,9 @@ void Game::updateSFMLevents()
     while(this->window->pollEvent(this->SFevent))
     {
         if(this->SFevent.type == sf::Event::Closed)
-            {this->window->close();}
+            {
+            this->endApplication();
+            this->window->close();}
     }
 
     //update player keybinds
