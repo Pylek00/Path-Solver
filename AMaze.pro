@@ -9,11 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    endgamestate.cpp \
     gamestate.cpp \
     graphicobject.cpp \
     main.cpp \
+    mainmenustate.cpp \
     mainwindow.cpp \
+    map.cpp \
     mapfield.cpp \
+    mazewall.cpp \
     movingobject.cpp \
     object.cpp \
     player.cpp \
@@ -21,10 +25,14 @@ SOURCES += \
     state.cpp
 
 HEADERS += \
+    endgamestate.h \
     gamestate.h \
     graphicobject.h \
+    mainmenustate.h \
     mainwindow.h \
+    map.h \
     mapfield.h \
+    mazewall.h \
     movingobject.h \
     object.h \
     player.h \

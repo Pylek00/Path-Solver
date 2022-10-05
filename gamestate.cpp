@@ -1,12 +1,14 @@
 #include "gamestate.h"
 
+
+
 GameState::GameState(sf::RenderWindow* window)
     : State(window)
 {
-    this->player = new Player(2,5);
+    this->player = new Player(3,5);
     this->gplayer = new PlayerGraphic(this->player);
     this->gameWindow = window;
-    this->mapsize = sf::Vector2i(32,24);
+    this->mapsize = sf::Vector2i(40,30);
     this->createMap();
 }
 
@@ -21,6 +23,7 @@ GameState::~GameState()
     }
 
     this->map_field.clear();
+    delete map;
 }
 
 void GameState::createMap()
@@ -28,11 +31,8 @@ void GameState::createMap()
     for(int i=0;i < this->mapsize.x;i++)
     {
         for(int j=0; j<this->mapsize.y;j++)
-        {
-            //this->mapf_h = new MapField(sf::Vector2f(5+i*25,5+j*25));
-            this->map_field.push_back(new MapField(sf::Vector2f(5+i*25,5+j*25)));
-
-            //std::cout<<i<<" , "<<j<<" , "<<this->map_field.size()<<std::endl;
+        {         
+            this->map_field.push_back(new MapField(sf::Vector2f(5+i*25,5+j*25)));            
         }
     }
 }
@@ -44,10 +44,22 @@ void GameState::update_renderMap()
     }
     this->map_field[calculate_player_location(this->player->getPosition())]->makeVisited();
 
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+    this->map_field[this->calculate_mouse_position(sf::Mouse::getPosition(*gameWindow))]->makeWall();
+        //std::cout<<"AAAAAAAAAAAAAAAAAAAAAAA"<<std::endl;
+        //std::cout<<sf::Mouse::getPosition().x<<" "<<sf::Mouse::getPosition().x<<std::endl;
+    }
 }
 int GameState::calculate_player_location(sf::Vector2f position)
 {
 
+    int i = (position.x-2)/(this->map_field[1]->getSize()+5);
+    int j = (position.y-2)/(this->map_field[1]->getSize()+5);
+    return j+i*this->mapsize.y;
+}
+int GameState::calculate_mouse_position(sf::Vector2i position)
+{
     int i = (position.x-2)/(this->map_field[1]->getSize()+5);
     int j = (position.y-2)/(this->map_field[1]->getSize()+5);
     return j+i*this->mapsize.y;
@@ -57,11 +69,7 @@ void GameState::update(const float& dt)
 {
     this->updateKeyBinds(dt);
 
-    //std::cout<<"Hello Game State"<<std::endl;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    {
-        std::cout<<"AAAAAAAAAAAAAAAA"<<std::endl;
-    }
+
 }
 void GameState::updateKeyBinds(const float& dt)
 {
@@ -75,3 +83,5 @@ void GameState::render(sf::RenderTarget* target)
     this->gplayer->update_render(this->player, target);
 
 }
+
+

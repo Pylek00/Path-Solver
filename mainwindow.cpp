@@ -11,11 +11,11 @@ void Game::initWindow(){
 
 
 
-    std::ifstream ifs("AMaze/Config/window.txt");
+    //std::ifstream ifs("AMaze/Config/window.txt");
     std::string title = "Maze Explorer";
-    window_bounds.width = 805;
-    window_bounds.height = 605;
-    unsigned framerate_limit = 120;
+    window_bounds.width = 1005;
+    window_bounds.height = 755;
+    unsigned framerate_limit = 60;
     bool vertical_sync_enabled = false;
     settings.antialiasingLevel = 8;
 
@@ -32,8 +32,6 @@ void Game::initWindow(){
     this->window = new sf::RenderWindow(window_bounds, title);
     this->window->setFramerateLimit(framerate_limit);
     this->window->setVerticalSyncEnabled(vertical_sync_enabled);
-
-
 
 }
 

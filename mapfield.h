@@ -12,12 +12,15 @@ public:
     //logic
     void update_render(sf::RenderTarget* target);
     void makeVisited();
+    void makeWall();
     //getters
     float getSize();
     sf::Vector2f getPosition();
     bool getVisited();
+    bool getIfWall();
     //setters
     void setVisited();
+    void setWall();
 
 
 protected:
@@ -26,6 +29,7 @@ private:
     float size;
     sf::Vector2f position;
     bool visited;
+    bool isWall;
 };
 
 #endif // MAPFIELD_H
