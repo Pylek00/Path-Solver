@@ -69,7 +69,7 @@ void GameState::render(sf::RenderTarget* target)
     this->map->update_renderMap();
     this->update_renderMapFields();
 
-    this->gplayer->update_render(this->player, target, &shader);
+    this->gplayer->update_render(this->player, target);
 
 }
 ////////////////////////////////////////////////

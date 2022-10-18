@@ -3,36 +3,27 @@
 
 #include "state.h"
 #include "map.h"
+#include "player.h"
+#include "playergraphic.h"
 
-#include <string>
-#include <dos.h>
-#include <Windows.h>
-#include <chrono>
-#include <thread>
-#include <iostream>
-
-#include <cstdlib>
-#include <ctime>
 
 class MazeGeneratorState : public State
 {
-    struct ways
-    {
-        int rotation;
-        int x,y;
-    };
-
     sf::RenderWindow* gameWindow;
     Map* map;
     sf::Font font;
     sf::Text text;
 
     std::vector<MapField*> map_ptr;
-    sf::RectangleShape* line;
+    sf::RectangleShape c_line;
 
     std::stack<std::pair<int,int>> field_cords;
-    std::vector<ways> ways_s;
+    std::vector<sf::RectangleShape*> ways_s;
 
+
+    Player* player;
+    PlayerGraphic* gplayer;
+    sf::Vector2f previous_player_position;
 
     int vIter;
 

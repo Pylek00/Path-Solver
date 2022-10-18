@@ -5,7 +5,7 @@ Player::Player(int speed, int size)
     this->speed = speed;
     this->size = size;
     this->position = sf::Vector2f(15,315);
-    this->seeRange = 50;
+    this->seeRange = 100;
     this->rotation = 0;
 
     for(int i=0;i<sizeof(this->direction); i++)

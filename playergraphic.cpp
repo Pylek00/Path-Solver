@@ -32,7 +32,7 @@ PlayerGraphic::~PlayerGraphic()
 
 }
 
-void PlayerGraphic::update_render(Player* player, sf::RenderTarget* target,sf::Shader* shader)
+void PlayerGraphic::update_render(Player* player, sf::RenderTarget* target)
 {
 
     //shader->setParameter("hasTexture", true);
