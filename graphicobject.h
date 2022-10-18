@@ -13,6 +13,7 @@ public:
 
     sf::Sprite sprite;
     sf::Texture texture;
+    sf::Shader shader;
 
 
     //void draw(sf::RenderTarget* target);

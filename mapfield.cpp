@@ -1,10 +1,10 @@
 #include "mapfield.h"
 
-#define FIELD_SIZE       20.f;
 
 
 
-MapField::MapField(sf::Vector2f position)
+
+MapField::MapField(sf::Vector2f position,int x, int y)
 {
     this->size = FIELD_SIZE;
     this->shape = sf::RectangleShape(sf::Vector2f(this->size,this->size));
@@ -13,6 +13,9 @@ MapField::MapField(sf::Vector2f position)
     this->isWall = false;
     this->position = position;
     this->shape.setPosition(position);
+    this->shape.setOrigin(this->size/2.0f,this->size/2.0f);
+    this->x = x;
+    this->y = y;
 
 }
 MapField::~MapField()
@@ -22,7 +25,7 @@ MapField::~MapField()
 
 void MapField::update_render(sf::RenderTarget* target)
 {
-    this->shape.setPosition(this->position);
+    //this->shape.setPosition(this->position);
     target->draw(this->shape);
 }
 float MapField::getSize()
@@ -47,7 +50,7 @@ void MapField::makeVisited()
 
     if(!this->visited && !this->isWall)
     {
-        this->shape.setFillColor(sf::Color::Green);
+        this->shape.setFillColor(sf::Color::White);
         this->visited = true;
     }
 }

@@ -1,14 +1,13 @@
 #include "map.h"
 
-#define MAP_SIZE_X   40
-#define MAP_SIZE_Y   30
+
 
 
 Map::Map(sf::RenderWindow* window)
 {
     this->gameWindow = window;
     this->mapsize = sf::Vector2i(MAP_SIZE_X,MAP_SIZE_Y);
-    this->createMap();
+
 }
 Map::~Map()
 {
@@ -21,15 +20,19 @@ Map::~Map()
 }
 
 
-void Map::createMap()
+std::vector<MapField *> Map::createMap()
 {
     for(int i=0;i < this->mapsize.x;i++)
     {
         for(int j=0; j<this->mapsize.y;j++)
         {
-            this->map_field.push_back(new MapField(sf::Vector2f(5+i*25,5+j*25)));
+            this->map_field.push_back(
+                        new MapField(sf::Vector2f(
+                                         5+i*(FIELD_SIZE+5)+FIELD_SIZE/2.0f,FIELD_SIZE/2.0f+5+j*(FIELD_SIZE+5)
+                                         ),i,j));
         }
     }
+    return this->map_field;
 }
 void Map::update_renderMap()
 {

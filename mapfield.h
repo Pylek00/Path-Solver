@@ -1,13 +1,15 @@
 #ifndef MAPFIELD_H
 #define MAPFIELD_H
 
+#define FIELD_SIZE 20
+
 #include "graphicobject.h"
 
 class MapField : public GraphicObject
 {
 public:
 
-    MapField(sf::Vector2f position);
+    MapField(sf::Vector2f position,int x,int y);
     virtual ~MapField();
     //logic
     void update_render(sf::RenderTarget* target);
@@ -22,9 +24,11 @@ public:
     void setVisited();
     void setWall();
 
+    int x,y;
 
-protected:
     sf::RectangleShape shape;
+protected:
+    //sf::RectangleShape shape;
 private:
     float size;
     sf::Vector2f position;

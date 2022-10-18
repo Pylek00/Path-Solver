@@ -4,6 +4,7 @@
 #include "state.h"
 #include "gamestate.h"
 #include "playergraphic.h"
+#include "map.h"
 
 class Game
 {

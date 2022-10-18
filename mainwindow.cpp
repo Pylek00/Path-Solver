@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "gamestate.h"
+#include "mainmenustate.h"
 
 
 
@@ -13,8 +14,8 @@ void Game::initWindow(){
 
     //std::ifstream ifs("AMaze/Config/window.txt");
     std::string title = "Maze Explorer";
-    window_bounds.width = 1005;
-    window_bounds.height = 755;
+    window_bounds.width = (FIELD_SIZE+5)*MAP_SIZE_X+5;
+    window_bounds.height = (FIELD_SIZE+5)*MAP_SIZE_Y+5;
     unsigned framerate_limit = 60;
     bool vertical_sync_enabled = false;
     settings.antialiasingLevel = 8;
@@ -37,7 +38,7 @@ void Game::initWindow(){
 
 void Game::initStates()
 {
-    this->states.push(new GameState(this->window));
+    this->states.push(new MainMenuState(this->window, &this->states));
 }
 
 void Game::initObjects()
@@ -112,17 +113,11 @@ void Game::render()
 
     this->window->clear();
     /////////////////////////////////////////
-    //player render
-    //this->gplayer->update_render(this->player,this->window);
-
-
 
     if(!this->states.empty())
     {
         this->states.top()->render(this->window);
     }
-
-
 
     //////////////////////////////////////////////////
     this->window->display();
@@ -150,7 +145,7 @@ void Game::updateDt()
     this->dt = this->dtTime.restart().asSeconds();
 
     //system("cls");
-    std::cout <<"Frames per second: "<<1/this->dt << std::endl;
+    //std::cout <<"Frames per second: "<<1/this->dt << std::endl;
 }
 
 void Game::endApplication()

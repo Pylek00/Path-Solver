@@ -21,12 +21,15 @@
 class State
 {
     sf::RenderWindow* window;
-    std::vector<sf::Texture> textures;
+    std::vector<sf::Texture> textures;    
+
+
+protected:
+    std::stack<State*>* states;
     bool quit;
 
-
 public:
-    State(sf::RenderWindow* window);
+    State(sf::RenderWindow* window, std::stack<State*>* states);
     virtual ~State();
 
     const bool& getQuit() const;
@@ -34,6 +37,7 @@ public:
     virtual void checkForQuit();
     virtual void update(const float& dt) = 0;
     virtual void render(sf::RenderTarget* target = nullptr) = 0;
+
 };
 
 #endif // STATE_H

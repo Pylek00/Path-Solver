@@ -12,12 +12,13 @@ public:
 
 
     //void draw(sf::RenderTarget* target);
-    void update_render(Player* player, sf::RenderTarget* target);
+    void update_render(Player* player, sf::RenderTarget* target,sf::Shader* shader);
 
 
 private:
 
         sf::CircleShape shape;
+        sf::CircleShape lightShape;
 
 };
 

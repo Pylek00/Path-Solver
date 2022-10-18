@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    button.cpp \
+    collision.cpp \
     endgamestate.cpp \
     gamestate.cpp \
     graphicobject.cpp \
@@ -17,6 +19,7 @@ SOURCES += \
     mainwindow.cpp \
     map.cpp \
     mapfield.cpp \
+    mazegeneratorstate.cpp \
     mazewall.cpp \
     movingobject.cpp \
     object.cpp \
@@ -25,6 +28,8 @@ SOURCES += \
     state.cpp
 
 HEADERS += \
+    button.h \
+    collision.h \
     endgamestate.h \
     gamestate.h \
     graphicobject.h \
@@ -32,6 +37,7 @@ HEADERS += \
     mainwindow.h \
     map.h \
     mapfield.h \
+    mazegeneratorstate.h \
     mazewall.h \
     movingobject.h \
     object.h \
@@ -56,4 +62,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Config/window.txt
+    Config/window.txt \
+    Graphics/MainMenu.jpg \
+    fragment_shader.frag \
+    images/ja.PNG \
+    images/light_cast.png \
+    images/zombie.png \
+    images \
+    vertex_shader.vert

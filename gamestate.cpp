@@ -2,68 +2,55 @@
 
 
 
-GameState::GameState(sf::RenderWindow* window)
-    : State(window)
+GameState::GameState(sf::RenderWindow* window,std::stack<State*>* states)
+    : State(window,states)
 {
-    this->player = new Player(3,5);
+    this->player = new Player(3,8);
     this->gplayer = new PlayerGraphic(this->player);
     this->gameWindow = window;
-    this->mapsize = sf::Vector2i(40,30);
-    this->createMap();
+    this->map = new Map(window);
+    this->map->createMap();
 }
 
 GameState::~GameState()
 {
-    delete player;
-    delete gplayer;
-    delete gameWindow;
-    for(int i=0;i < map_field.size();i++)
-    {
-        delete this->map_field[i];
-    }
+    delete this->player;
+    delete this->gplayer;
+    delete this->map;
 
-    this->map_field.clear();
-    delete map;
+
 }
 
-void GameState::createMap()
-{
-    for(int i=0;i < this->mapsize.x;i++)
-    {
-        for(int j=0; j<this->mapsize.y;j++)
-        {         
-            this->map_field.push_back(new MapField(sf::Vector2f(5+i*25,5+j*25)));            
-        }
-    }
-}
-void GameState::update_renderMap()
-{
-    for(int i=0;i<this->map_field.size();i++)
-    {
-        this->map_field[i]->update_render(this->gameWindow);
-    }
-    this->map_field[calculate_player_location(this->player->getPosition())]->makeVisited();
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+void GameState::update_renderMapFields()
+{
+
+    this->map->map_field[calculate_player_location(this->player->getPosition())]->makeVisited();
+
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+            this->calculate_mouse_position(sf::Mouse::getPosition(*gameWindow)) < MAP_SIZE_X*MAP_SIZE_Y-1)
     {
-    this->map_field[this->calculate_mouse_position(sf::Mouse::getPosition(*gameWindow))]->makeWall();
-        //std::cout<<"AAAAAAAAAAAAAAAAAAAAAAA"<<std::endl;
-        //std::cout<<sf::Mouse::getPosition().x<<" "<<sf::Mouse::getPosition().x<<std::endl;
+    this->map->map_field[this->calculate_mouse_position(sf::Mouse::getPosition(*gameWindow))]->makeWall();
     }
 }
 int GameState::calculate_player_location(sf::Vector2f position)
 {
 
-    int i = (position.x-2)/(this->map_field[1]->getSize()+5);
-    int j = (position.y-2)/(this->map_field[1]->getSize()+5);
-    return j+i*this->mapsize.y;
+    int i = (position.x-2)/(this->map->map_field[1]->getSize()+5);
+    int j = (position.y-2)/(this->map->map_field[1]->getSize()+5);
+    return j+i*this->map->mapsize.y;
 }
 int GameState::calculate_mouse_position(sf::Vector2i position)
 {
-    int i = (position.x-2)/(this->map_field[1]->getSize()+5);
-    int j = (position.y-2)/(this->map_field[1]->getSize()+5);
-    return j+i*this->mapsize.y;
+
+    int i = (position.x-2)/(this->map->map_field[1]->getSize()+5);
+    int j = (position.y-2)/(this->map->map_field[1]->getSize()+5);
+
+    return j+i*this->map->mapsize.y;
+
 }
+
+/////////////////////////////////actualizations
 
 void GameState::update(const float& dt)
 {
@@ -79,9 +66,22 @@ void GameState::updateKeyBinds(const float& dt)
 
 void GameState::render(sf::RenderTarget* target)
 {
-    this->update_renderMap();
-    this->gplayer->update_render(this->player, target);
+    this->map->update_renderMap();
+    this->update_renderMapFields();
 
+    this->gplayer->update_render(this->player, target, &shader);
+
+}
+////////////////////////////////////////////////
+
+//////////////////////////inits
+
+void GameState::initShaders()
+{
+    if(!this->shader.loadFromFile("vertex_shader.vert", "fragment_shader.frag"))
+    {
+        std::cout<<"Nie udało sie wczytac cieniowania :("<<std::endl;
+    }
 }
 
 
