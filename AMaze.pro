@@ -23,6 +23,8 @@ SOURCES += \
     mazewall.cpp \
     movingobject.cpp \
     object.cpp \
+    particles.cpp \
+    pathfinder.cpp \
     player.cpp \
     playergraphic.cpp \
     state.cpp
@@ -41,6 +43,8 @@ HEADERS += \
     mazewall.h \
     movingobject.h \
     object.h \
+    particles.h \
+    pathfinder.h \
     player.h \
     playergraphic.h \
     state.h
@@ -62,11 +66,17 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    576.jpg \
     Config/window.txt \
     Graphics/MainMenu.jpg \
     fragment_shader.frag \
+    images/576.jpg \
+    images/blueman.png \
+    images/floor.png \
     images/ja.PNG \
     images/light_cast.png \
+    images/pngegg.png \
+    images/vampire.png \
     images/zombie.png \
     images \
     vertex_shader.vert

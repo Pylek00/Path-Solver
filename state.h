@@ -10,6 +10,7 @@
 #include<stack>
 #include<random>
 #include<map>
+#include<cmath>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
